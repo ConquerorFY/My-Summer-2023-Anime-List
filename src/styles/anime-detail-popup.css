@@ -1,0 +1,51 @@
+.detail-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 50px;
+}
+
+.detail-background {
+    background-color: rgba(255, 255, 255, 0.8);
+    width: max-content;
+    max-width: 70%;
+    margin: auto;
+    border-radius: 6px;
+    padding: 20px;
+    position: relative;
+}
+
+img {
+    width: 400px;
+    display: block;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+table td {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.video-container iframe {
+    width: 100%;
+    aspect-ratio: 16/9;
+}
+
+.close-btn {
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 790px) {
+    .detail-background {
+        width: 80%;
+    }
+
+    img {
+        width: 100%;
+    }
+}

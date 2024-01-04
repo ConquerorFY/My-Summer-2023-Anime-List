@@ -1,0 +1,34 @@
+.item-container {
+    cursor: pointer;
+    width: 300px;
+    height: 400px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 6px;
+}
+
+.item-detail {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: white;
+}
+
+.item-detail span {
+    display: block;
+    font-size: 1.1em;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.item-detail .title {
+    text-decoration-line: underline;
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}

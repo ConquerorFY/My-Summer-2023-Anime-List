@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import Footer from './components/Footer';
+import Navbar from './components/Navbar';
+import AnimeListing from './pages/anime-listing';
+import './styles/app.css'
+import { useQuery } from 'react-query';
+import { getAnimeList } from './services/api';
+import Loader from './components/Loader';
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
 
-function App() {
+export default function App() {
+  // eslint-disable-next-line
+  const [loadApp, setLoadApp] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isFirstRender, setIsFirstRender] = useState(true);
+  const { data: responseData, isSuccess, isLoading } = useQuery(['anime', currentPage], getAnimeList);
+
+  useEffect(() => {
+    if (isLoading && isFirstRender) {
+      setLoadApp(false);
+    }
+    if (isSuccess && isFirstRender) {
+      setTimeout(() => {
+        setLoadApp(true);
+      }, 22000);
+      setIsFirstRender(false);
+    }
+  }, [isSuccess, isLoading, isFirstRender]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {
+        !loadApp
+          ? <Loader />
+          : <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{
+              duration: 1,
+              delay: 2
+            }}
+          >
+            <div className="App">
+              <Navbar />
+              <AnimeListing responseData={responseData} currentPage={currentPage} setCurrentPage={setCurrentPage} isLoading={isLoading} />
+              <Footer />
+            </div>
+          </motion.div>
+      }
+    </>
   );
 }
-
-export default App;

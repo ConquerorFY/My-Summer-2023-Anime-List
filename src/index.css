@@ -5,6 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('./assets/img/jjk-hidden-inventory-3.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: #6a7fbf;
+  min-height: 100vh;
 }
 
 code {

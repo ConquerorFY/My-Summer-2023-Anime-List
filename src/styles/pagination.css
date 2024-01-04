@@ -1,0 +1,28 @@
+.pagination-container {
+    padding: 0 40px;
+    margin-bottom: 30px;
+}
+
+.pagination-container span {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: rgb(26, 26, 161);
+}
+
+.pagination-container .left,
+.pagination-container .right {
+    color: white;
+    background-color: rgb(26, 26, 161);
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.pagination-container .left:hover,
+.pagination-container .right:hover {
+    background-color: black;
+}
+
+.pagination-container .indicator {
+    margin: 0 20px;
+}
