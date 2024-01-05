@@ -8,7 +8,7 @@ import Loader from './components/Loader';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-export default function App() {
+export default function App({ bodyRef }) {
   // eslint-disable-next-line
   const [loadApp, setLoadApp] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,16 +16,23 @@ export default function App() {
   const { data: responseData, isSuccess, isLoading } = useQuery(['anime', currentPage], getAnimeList);
 
   useEffect(() => {
-    if (isLoading && isFirstRender) {
-      setLoadApp(false);
+    const handleSwitching = () => {
+      if (isLoading && isFirstRender) {
+        setLoadApp(false);
+      }
+      if (isSuccess && isFirstRender) {
+        setTimeout(() => {
+          setLoadApp(true);
+        }, 22000);
+        setIsFirstRender(false);
+      }
     }
-    if (isSuccess && isFirstRender) {
-      setTimeout(() => {
-        setLoadApp(true);
-      }, 22000);
-      setIsFirstRender(false);
+
+    bodyRef.addEventListener('click', handleSwitching);
+    return () => {
+      bodyRef.removeEventListener('click', handleSwitching);
     }
-  }, [isSuccess, isLoading, isFirstRender]);
+  }, [isSuccess, isLoading, isFirstRender, bodyRef]);
 
   return (
     <>

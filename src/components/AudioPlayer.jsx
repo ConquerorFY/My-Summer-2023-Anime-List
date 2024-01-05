@@ -1,16 +1,17 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import jjk from '../assets/video/jjk-op3.mp4';
 
-const AudioPlayer = () => {
+const AudioPlayer = ({ bodyRef }) => {
     const audioRef = useRef(null);
-    const bodyRef = document.querySelector('body');
+    const [hasPlayed, setHasPlayed] = useState(false);
 
     useEffect(() => {
         const handlePlayer = () => {
             // Ensure that the audio element exists
-            if (audioRef.current) {
+            if (audioRef.current && !hasPlayed) {
                 // Play the audio once it's loaded
                 audioRef.current.play();
+                setHasPlayed(true);
             }
         }
         bodyRef.addEventListener('click', handlePlayer);
@@ -18,7 +19,7 @@ const AudioPlayer = () => {
         return () => {
             bodyRef.removeEventListener('click', handlePlayer);
         }
-    }, [bodyRef]);
+    }, [bodyRef, hasPlayed]);
 
     return (
         <div style={{ position: 'absolute' }}>
