@@ -1,31 +1,40 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import jjk from '../assets/video/jjk-op3.mp4';
 
-// const AudioPlayer = ({ bodyRef }) => {
-const AudioPlayer = () => {
+const AudioPlayer = ({ bodyRef }) => {
+// const AudioPlayer = () => {
     const audioRef = useRef(null);
     // in case autoplay does not work 
-    // const [hasPlayed, setHasPlayed] = useState(false);
+    const [hasPlayed, setHasPlayed] = useState(false);
 
+    useEffect(() => {
+        const handlePlayer = () => {
+            // Ensure that the audio element exists
+            if (audioRef.current && !hasPlayed) {
+                // Play the audio once it's loaded
+                audioRef.current.play();
+                setHasPlayed(true);
+            }
+        }
+        bodyRef.addEventListener('click', handlePlayer);
+        return () => {
+            bodyRef.removeEventListener('click', handlePlayer);
+        }
+    }, [bodyRef, hasPlayed]);
+
+    // in case autoplay works (not sure what the status is now)
     // useEffect(() => {
-    //     const handlePlayer = () => {
-    //         // Ensure that the audio element exists
-    //         if (audioRef.current && !hasPlayed) {
-    //             // Play the audio once it's loaded
-    //             audioRef.current.play();
-    //             setHasPlayed(true);
-    //         }
+    //     if (audioRef.current && !hasPlayed) {
+    //         // Play the audio once it's loaded
+    //         audioRef.current.play();
+    //         setHasPlayed(true);
     //     }
-    //     bodyRef.addEventListener('click', handlePlayer);
-
-    //     return () => {
-    //         bodyRef.removeEventListener('click', handlePlayer);
-    //     }
-    // }, [bodyRef, hasPlayed]);
+    // }, [hasPlayed]);
 
     return (
         <div style={{ position: 'absolute' }}>
-            <audio ref={audioRef} autoPlay={true} loop={false}>
+            {/* <audio ref={audioRef} autoPlay={true} loop={false}> */}
+            <audio ref={audioRef} controls={false} loop={false}>
                 <source src={jjk} type="audio/mp4" />
                 Your browser does not support the audio tag.
             </audio>

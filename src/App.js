@@ -8,44 +8,45 @@ import Loader from './components/Loader';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-// export default function App({ bodyRef }) {
-export default function App() {
+export default function App({ bodyRef }) {
+  // export default function App() {
   const [loadApp, setLoadApp] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [isFirstRender, setIsFirstRender] = useState(true);
   const { data: responseData, isSuccess, isLoading } = useQuery(['anime', currentPage], getAnimeList);
 
   // in case autoplay does not work 
-  // useEffect(() => {
-  //   const handleSwitching = () => {
-  //     if (isLoading && isFirstRender) {
-  //       setLoadApp(false);
-  //     }
-  //     if (isSuccess && isFirstRender) {
-  //       setTimeout(() => {
-  //         setLoadApp(true);
-  //       }, 22000);
-  //       setIsFirstRender(false);
-  //     }
-  //   }
-
-  //   bodyRef.addEventListener('click', handleSwitching);
-  //   return () => {
-  //     bodyRef.removeEventListener('click', handleSwitching);
-  //   }
-  // }, [isSuccess, isLoading, isFirstRender, bodyRef]);
-
   useEffect(() => {
-    if (isLoading && isFirstRender) {
-      setLoadApp(false);
+    const handleSwitching = () => {
+      if (isLoading && isFirstRender) {
+        setLoadApp(false);
+      }
+      if (isSuccess && isFirstRender) {
+        setTimeout(() => {
+          setLoadApp(true);
+        }, 22000);
+        setIsFirstRender(false);
+      }
     }
-    if (isSuccess && isFirstRender) {
-      setTimeout(() => {
-        setLoadApp(true);
-      }, 21000);
-      setIsFirstRender(false);
+
+    bodyRef.addEventListener('click', handleSwitching);
+    return () => {
+      bodyRef.removeEventListener('click', handleSwitching);
     }
-  }, [isSuccess, isLoading, isFirstRender]);
+  }, [isSuccess, isLoading, isFirstRender, bodyRef]);
+
+  // in case autoplay works (not sure what the status is now)
+  // useEffect(() => {
+  //   if (isLoading && isFirstRender) {
+  //     setLoadApp(false);
+  //   }
+  //   if (isSuccess && isFirstRender) {
+  //     setTimeout(() => {
+  //       setLoadApp(true);
+  //     }, 21000);
+  //     setIsFirstRender(false);
+  //   }
+  // }, [isSuccess, isLoading, isFirstRender]);
 
   return (
     <>
