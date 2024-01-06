@@ -1,25 +1,27 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import jjk from '../assets/video/jjk-op3.mp4';
 
-const AudioPlayer = ({ bodyRef }) => {
+// const AudioPlayer = ({ bodyRef }) => {
+const AudioPlayer = () => {
     const audioRef = useRef(null);
-    const [hasPlayed, setHasPlayed] = useState(false);
+    // in case autoplay does not work 
+    // const [hasPlayed, setHasPlayed] = useState(false);
 
-    useEffect(() => {
-        const handlePlayer = () => {
-            // Ensure that the audio element exists
-            if (audioRef.current && !hasPlayed) {
-                // Play the audio once it's loaded
-                audioRef.current.play();
-                setHasPlayed(true);
-            }
-        }
-        bodyRef.addEventListener('click', handlePlayer);
+    // useEffect(() => {
+    //     const handlePlayer = () => {
+    //         // Ensure that the audio element exists
+    //         if (audioRef.current && !hasPlayed) {
+    //             // Play the audio once it's loaded
+    //             audioRef.current.play();
+    //             setHasPlayed(true);
+    //         }
+    //     }
+    //     bodyRef.addEventListener('click', handlePlayer);
 
-        return () => {
-            bodyRef.removeEventListener('click', handlePlayer);
-        }
-    }, [bodyRef, hasPlayed]);
+    //     return () => {
+    //         bodyRef.removeEventListener('click', handlePlayer);
+    //     }
+    // }, [bodyRef, hasPlayed]);
 
     return (
         <div style={{ position: 'absolute' }}>

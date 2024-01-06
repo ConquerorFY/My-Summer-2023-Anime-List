@@ -8,12 +8,15 @@ import AudioPlayer from './components/AudioPlayer';
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const bodyRef = document.querySelector('body');
+// in case autoplay does not work 
+// const bodyRef = document.querySelector('body');
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <AudioPlayer bodyRef={bodyRef} />
-      <App bodyRef={bodyRef}  />
+      {/* <AudioPlayer bodyRef={bodyRef} />
+      <App bodyRef={bodyRef} /> */}
+      <AudioPlayer />
+      <App />
       {/* <ReactQueryDevtools /> */}
     </QueryClientProvider>
   </React.StrictMode>

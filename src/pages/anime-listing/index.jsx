@@ -17,7 +17,7 @@ export default function AnimeListing({ responseData, currentPage, setCurrentPage
         return () => clearTimeout(delayTimer);
     }, []);
 
-    console.log(responseData);
+    // console.log(responseData);
     return isLoading ? <main></main> : (
         <main>
             {isShowDetail ? <AnimeDetailPopup selectedAnime={selectedAnime} setIsShowDetail={setIsShowDetail} /> : ''}

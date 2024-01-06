@@ -8,31 +8,44 @@ import Loader from './components/Loader';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-export default function App({ bodyRef }) {
-  // eslint-disable-next-line
+// export default function App({ bodyRef }) {
+export default function App() {
   const [loadApp, setLoadApp] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [isFirstRender, setIsFirstRender] = useState(true);
   const { data: responseData, isSuccess, isLoading } = useQuery(['anime', currentPage], getAnimeList);
 
-  useEffect(() => {
-    const handleSwitching = () => {
-      if (isLoading && isFirstRender) {
-        setLoadApp(false);
-      }
-      if (isSuccess && isFirstRender) {
-        setTimeout(() => {
-          setLoadApp(true);
-        }, 22000);
-        setIsFirstRender(false);
-      }
-    }
+  // in case autoplay does not work 
+  // useEffect(() => {
+  //   const handleSwitching = () => {
+  //     if (isLoading && isFirstRender) {
+  //       setLoadApp(false);
+  //     }
+  //     if (isSuccess && isFirstRender) {
+  //       setTimeout(() => {
+  //         setLoadApp(true);
+  //       }, 22000);
+  //       setIsFirstRender(false);
+  //     }
+  //   }
 
-    bodyRef.addEventListener('click', handleSwitching);
-    return () => {
-      bodyRef.removeEventListener('click', handleSwitching);
+  //   bodyRef.addEventListener('click', handleSwitching);
+  //   return () => {
+  //     bodyRef.removeEventListener('click', handleSwitching);
+  //   }
+  // }, [isSuccess, isLoading, isFirstRender, bodyRef]);
+
+  useEffect(() => {
+    if (isLoading && isFirstRender) {
+      setLoadApp(false);
     }
-  }, [isSuccess, isLoading, isFirstRender, bodyRef]);
+    if (isSuccess && isFirstRender) {
+      setTimeout(() => {
+        setLoadApp(true);
+      }, 21000);
+      setIsFirstRender(false);
+    }
+  }, [isSuccess, isLoading, isFirstRender]);
 
   return (
     <>
